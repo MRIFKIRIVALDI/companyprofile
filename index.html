@@ -3,342 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HARRIS ELEKTRONIK - Sahabat Elektronikmu yang Terpercaya</title>
-  <meta name="description" content="Distributor elektronik Sukabumi. Penjualan offline/online. Polytron Sharp Philips Rinnai dll. WA 0815-6316-6847">
-  <meta property="og:title" content="HARRIS ELEKTRONIK">
-  <meta property="og:description" content="Toko elektronik terpercaya Sukabumi">
-  <meta property="og:image" content="image/toko.jpg">
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Harris Electronic</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="image/logo_sosmed/logo harris o (1).png">
 </head>
-<body class="loading">
+<body style="background: black; color: white; margin: 0; font-family: 'Quicksand', sans-serif;">
+  <!-- Navbar Orange w/ Logo Left -->
+  <header style="position: fixed; top: 0; width: 100%; background: #FF6600; z-index: 1000; padding: 1rem 0; box-shadow: 0 4px 12px rgba(255,102,0,0.4);">
+    <nav style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 3rem;">
+      <!-- Logo Kiri Atas -->
+      <div style="display: flex; align-items: center; gap: 1rem; margin-left: -400px;">
+        <img src="image/logo_sosmed/logo haris full.png" alt="Harris Electronic Logo" style="height: 50px; width: auto;">
+      </div>
+      <!-- Nav Buttons White Text -->
+      <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0;">
+        <li><a href="#home" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Home</a></li>
+        <li><a href="#tentang" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Tentang kami</a></li>
+        <li><a href="#visi" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Visi & Misi</a></li>
+        <li><a href="#layanan" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Layanan kami</a></li>
+        <li><a href="#produk" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Produk</a></li>
+        <li><a href="#shopping" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Shopping</a></li>
+        <li><a href="#kontak" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Kontak</a></li>
+      </ul>
+      <!-- Mobile Hamburger (Temporary Hidden) -->
+      <div class="hamburger" style="display: none; flex-direction: column; gap: 4px; cursor: pointer;">
+        <span style="width: 25px; height: 3px; background: white;"></span>
+        <span style="width: 25px; height: 3px; background: white;"></span>
+        <span style="width: 25px; height: 3px; background: white;"></span>
+      </div>
+    </nav>
+  </header>
 
-<!-- Navbar #ff6b00 solid -->
-<header>
-  <nav>
-    <div class="logo">
-      <img src="image/logo_sosmed/logo haris full.png" alt="HARRIS ELEKTRONIK">
-    </div>
-    <ul class="nav-links">
-      <li><a href="#home" data-i18n="home">Home</a></li>
-      <li><a href="#tentang" data-i18n="tentang">Tentang Kami</a></li>
-      <li><a href="#visi" data-i18n="visiMisi">Visi & Misi</a></li>
-      <li><a href="#layanan" data-i18n="layanan">Layanan</a></li>
-      <li><a href="#produk" data-i18n="produk">Produk</a></li>
-      <li><a href="#shopping" data-i18n="shopping">Shopping</a></li>
-      <li><a href="#kontak" data-i18n="kontak">Kontak</a></li>
-    </ul>
-    <div class="toggles">
-      <button class="lang-toggle" data-i18n="toggleLang">EN</button>
-      <button class="theme-toggle" data-i18n="toggleDark">Dark</button>
-      <div class="hamburger">
-        <span></span><span></span><span></span>
+  <!-- Hero Section - Black BG, Center Content Matching image/home.png -->
+  <main style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 2rem 4rem; background: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), url('image/toko.jpg') center/cover; background-size: cover;">
+    <section id="home" style="max-width: 900px;">
+      <!-- Title Besar Center -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.3rem;">
+        <img src="image/logo_sosmed/harris.png" alt="Harris" style="height: 170px; width: auto; filter: drop-shadow(0 6px 30px rgba(255,255,255,0.6));">
+        <h1 style="font-size: clamp(5rem, 11vw, 7rem); font-weight: 900; color: white; margin: 0; letter-spacing: -0.02em; text-shadow: 0 4px 25px rgba(255,255,255,0.5); white-space: nowrap;">Harris Electronic</h1>
       </div>
-    </div>
-  </nav>
-</header>
+      
+      <!-- Slogan Below - Satu Baris -->
+      <p style="font-size: clamp(2rem, 100vw, 2rem); color: #DDDDDD; margin: 0 0 4rem 0; font-weight: 1000; white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Sahabat Elektronikmu yang Terpercaya</p>
+      
+      <!-- Social Logos Grid Below (tiktok, fb, ig, shopee, tokopedia) -->
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto;">
+        <a href="https://tiktok.com/@harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
+          <img src="image/logo_sosmed/tiktok.png" alt="TikTok" style="width: 40px; height: 40px;">
+        </a>
+        <a href="https://facebook.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
+          <img src="image/logo_sosmed/fb.png" alt="Facebook" style="width: 40px; height: 40px;">
+        </a>
+        <a href="https://instagram.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
+          <img src="image/logo_sosmed/ig.png" alt="Instagram" style="width: 40px; height: 40px;">
+        </a>
+        <a href="https://shopee.co.id/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
+          <img src="image/logo_sosmed/shopee.png" alt="Shopee" style="width: 40px; height: 40px;">
+        </a>
+        <a href="https://tokopedia.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
+          <img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia" style="width: 40px; height: 40px;">
+        </a>
+      </div>
+    </section>
+  </main>
 
-<!-- Hero - Black + toko.jpg 5% opacity, no harris.png -->
-<section id="home" class="hero">
-  <div class="hero-content">
-    <img src="image/logo_sosmed/harris.png" alt="Logo">
-    <h1 data-i18n="heroTitle">HARRIS ELEKTRONIK</h1>
-    <p data-i18n="heroSubtitle">"Sahabat Elektronikmu yang Terpercaya"</p>
-    <div class="social-links">
-      <a href="https://www.tiktok.com/@harriselectronic" target="_blank"><img src="image/logo_sosmed/tiktok.png" alt="TikTok"></a>
-      <a href="https://www.instagram.com/harriselectronic.id/" target="_blank"><img src="image/logo_sosmed/ig.png" alt="Instagram"></a>
-      <a href="https://www.facebook.com/p/Harris-Electronic-Official-61559271062964/" target="_blank"><img src="image/logo_sosmed/fb.png" alt="Facebook"></a>
-      <a href="https://www.youtube.com/@HarrisElectronic" target="_blank"><img src="image/logo_sosmed/yt.png" alt="YouTube"></a>
-      <a href="https://x.com/HarrisElec89121" target="_blank"><img src="image/logo_sosmed/twitter.png" alt="X"></a>
-      <a href="https://shopee.co.id/harriselectronic" target="_blank"><img src="image/logo_sosmed/shopee.png" alt="Shopee"></a>
-      <a href="https://www.tokopedia.com/harriselectronicc" target="_blank"><img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia"></a>
-    </div>
-  </div>
-</section>
-
-<!-- Tentang -->
-<section id="tentang" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem">
-    <h2 class="section-title" data-i18n="profileTitle">Profil Perusahaan</h2>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center">
-      <div>
-        <p data-i18n="profilePara1" style="font-size:1.2rem; line-height:1.8; margin-bottom:1.5rem"></p>
-        <p data-i18n="profilePara2" style="font-size:1.2rem; line-height:1.8"></p>
-        <a href="#layanan" class="btn">Lihat Layanan</a>
-      </div>
-      <img src="image/Profil Perusahaan.png" alt="Toko" style="width:100%; height:350px; object-fit:cover; border-radius:20px; box-shadow:0 15px 40px rgba(0,0,0,0.2)">
-    </div>
-  </div>
-</section>
-
-<!-- Visi Misi -->
-<section id="visi" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem; background:var(--bg-secondary)">
-    <h2 class="section-title">Visi & Misi</h2>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2.5rem; align-items:center">
-      <div class="service-card">
-        <i class="fas fa-bullseye" style="font-size:4.5rem; color:#00b894"></i>
-        <h3 data-i18n="visiTitle">Visi</h3>
-        <p data-i18n="visiDesc" style="font-size:1.1rem"></p>
-      </div>
-      <div style="text-align:center">
-        <img src="image/Visi & Misi.png" alt="Tim" style="width:250px; height:250px; border-radius:50%; object-fit:cover; box-shadow:0 15px 40px rgba(0,0,0,0.2)">
-      </div>
-      <div class="service-card">
-        <h3 data-i18n="misiTitle" style="color:#00b894; margin-bottom:1.5rem">Misi</h3>
-        <ol style="text-align:left; font-size:1.1rem; padding-left:1.5rem">
-          <li data-i18n="misi1"></li>
-          <li data-i18n="misi2"></li>
-          <li data-i18n="misi3"></li>
-          <li data-i18n="misi4"></li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Layanan -->
-<section id="layanan" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem">
-    <h2 class="section-title" data-i18n="servicesTitle">Layanan Kami</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <i class="fas fa-truck" style="font-size:4.5rem; color:#00b894"></i>
-        <h3 data-i18n="distribusiTitle">DISTRIBUSI</h3>
-        <p data-i18n="distribusiDesc"></p>
-        <a href="#kontak" class="btn">Hubungi</a>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-store" style="font-size:4.5rem; color:#00b894"></i>
-        <h3 data-i18n="ritelTitle">TOKO RITEL</h3>
-        <p data-i18n="ritelDesc"></p>
-        <a href="#kontak" class="btn">Kunjungi</a>
-      </div>
-      <div class="service-card">
-        <i class="fas fa-laptop" style="font-size:4.5rem; color:#00b894"></i>
-        <h3 data-i18n="onlineTitle">ONLINE SHOP</h3>
-        <p data-i18n="onlineDesc"></p>
-        <a href="https://shopee.co.id/harriselectronic" class="btn" target="_blank">Shopee</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Produk - Many small round imgs -->
-<section id="produk" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem">
-    <h2 class="section-title" data-i18n="productsTitle">Produk</h2>
+  <!-- Inline Script for Hover Animations -->
+  <script>
+    // Navbar hover
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.color = '#FFD700';
+        link.style.transform = 'translateY(-3px)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.color = 'white';
+        link.style.transform = 'translateY(0)';
+      });
+    });
     
-    <!-- Kategori - Small round many -->
-    <h3 style="font-size:2.2rem; margin:2rem 0 3rem; text-align:center; color:#00b894" data-i18n="categoriesTitle">Kategori Produk</h3>
-    <div class="products-grid">
-      <div class="product-card">
-        <img src="image/barang_elektronik/ac.png" alt="AC">
-        <h4>AC & Pendingin</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/kulkas.png" alt="Kulkas">
-        <h4>Kulkas</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/mesin_cuci.png" alt="Mesin Cuci">
-        <h4>Mesin Cuci</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/tv.png" alt="TV">
-        <h4>TV</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/speaker.png" alt="Speaker">
-        <h4>Speaker</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/blender.png" alt="Blender">
-        <h4>Blender</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/freezer.png" alt="Freezer">
-        <h4>Freezer</h4>
-      </div>
-      <div class="product-card">
-        <img src="image/barang_elektronik/water_heater.png" alt="Water Heater">
-        <h4>Water Heater</h4>
+    // Social hover
+    document.querySelectorAll('main a').forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.transform = 'scale(1.1) rotate(10deg)';
+        link.style.background = 'rgba(255,102,0,0.3)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.transform = 'scale(1)';
+        link.style.background = 'rgba(255,255,255,0.1)';
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^=\"#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+<!-- Tentang Kami - Mirip image/Profil Perusahaan.png -->
+  <section id="tentang" style="padding: 8rem 3rem 6rem; background: white; color: black; scroll-margin-top: 120px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 style="font-size: clamp(3rem, 5vw, 4rem); font-weight: 800; text-align: center; margin-bottom: 4rem; color: #007146; letter-spacing: -0.01em;">Profil Perusahaan</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
+        <div style="order: 2;"></div>
+        <!-- Left: Image toko.jpg -->
+        <div style="position: relative; clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%); height: 400px; border-radius: 24px 24px 0 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+          <img src="image/toko.jpg" alt="Toko Harris Elektronik" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+        </div>
+        <!-- Right: Text Content -->
+        <div style="order: 1;">
+          <p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 2rem; color: black; font-weight: 400;">
+            HARRIS ELEKTRONIK merupakan toko elektronik terpercaya di Sukabumi yang melayani <strong>penjualan langsung (offline)</strong>, <strong>distribusi ke toko-toko lain</strong>, dan <strong>penjualan online</strong> melalui marketplace terkemuka seperti Shopee dan Tokopedia.
+          </p>
+          <p style="font-size: 1.3rem; line-height: 1.8; color: #050505; font-weight: 400;">
+            Kami menyediakan berbagai produk elektronik berkualitas dari brand-brand terkenal dengan harga kompetitif dan pelayanan terbaik. Toko fisik kami siap melayani Anda secara langsung.
+          </p>
+          <div style="margin-top: 3rem;">
+            <a href="#layanan" style="display: inline-block; background: #FF6600; color: white; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem; transition: all 0.4s ease; box-shadow: 0 8px 25px rgba(255,102,0,0.4);">Lihat Layanan Kami</a>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- Hover Effects for Tentang Section -->
+  <script>
+    // Image hover
+    const tokoImg = document.querySelector('#tentang img');
+    if (tokoImg) {
+      tokoImg.addEventListener('mouseenter', () => {
+        tokoImg.style.transform = 'scale(1.05)';
+      });
+      tokoImg.addEventListener('mouseleave', () => {
+        tokoImg.style.transform = 'scale(1)';
+      });
+    }
     
-    <!-- Brands ALL 18 running -->
-    <h3 style="font-size:2.2rem; margin:4rem 0 2rem; text-align:center; color:#00b894" data-i18n="brandsTitle">Brand Official</h3>
-    <div class="brands-carousel">
-      <div class="brands-wrapper">
-        <!-- Duplicate 2x for infinite scroll -->
-        <div class="brand-logo"><img src="image/logo_brand/aqua.png" alt="Aqua"></div>
-        <div class="brand-logo"><img src="image/logo_brand/bolde.png" alt="Bolde"></div>
-        <div class="brand-logo"><img src="image/logo_brand/changhong.png" alt="Changhong"></div>
-        <div class="brand-logo"><img src="image/logo_brand/cosmos.png" alt="Cosmos"></div>
-        <div class="brand-logo"><img src="image/logo_brand/gea.png" alt="Gea"></div>
-        <div class="brand-logo"><img src="image/logo_brand/gree.png" alt="Gree"></div>
-        <div class="brand-logo"><img src="image/logo_brand/kirin.png" alt="Kirin"></div>
-        <div class="brand-logo"><img src="image/logo_brand/mecco.png" alt="Mecco"></div>
-        <div class="brand-logo"><img src="image/logo_brand/miyako.png" alt="Miyako"></div>
-        <div class="brand-logo"><img src="image/logo_brand/modena.png" alt="Modena"></div>
-        <div class="brand-logo"><img src="image/logo_brand/niko.png" alt="Niko"></div>
-        <div class="brand-logo"><img src="image/logo_brand/philips.png" alt="Philips"></div>
-        <div class="brand-logo"><img src="image/logo_brand/polytron.png" alt="Polytron"></div>
-        <div class="brand-logo"><img src="image/logo_brand/rinnai.png" alt="Rinnai"></div>
-        <div class="brand-logo"><img src="image/logo_brand/rsa.png" alt="RSA"></div>
-        <div class="brand-logo"><img src="image/logo_brand/samono.png" alt="Samono"></div>
-        <div class="brand-logo"><img src="image/logo_brand/sharp.png" alt="Sharp"></div>
-        <div class="brand-logo"><img src="image/logo_brand/tcl.png" alt="TCL"></div>
-        <!-- Duplicate for loop -->
-        <div class="brand-logo"><img src="image/logo_brand/aqua.png" alt="Aqua"></div>
-        <div class="brand-logo"><img src="image/logo_brand/bolde.png" alt="Bolde"></div>
-        <div class="brand-logo"><img src="image/logo_brand/changhong.png" alt="Changhong"></div>
-        <div class="brand-logo"><img src="image/logo_brand/cosmos.png" alt="Cosmos"></div>
-        <div class="brand-logo"><img src="image/logo_brand/gea.png" alt="Gea"></div>
-        <div class="brand-logo"><img src="image/logo_brand/gree.png" alt="Gree"></div>
-        <div class="brand-logo"><img src="image/logo_brand/kirin.png" alt="Kirin"></div>
-        <div class="brand-logo"><img src="image/logo_brand/mecco.png" alt="Mecco"></div>
-        <div class="brand-logo"><img src="image/logo_brand/miyako.png" alt="Miyako"></div>
-        <div class="brand-logo"><img src="image/logo_brand/modena.png" alt="Modena"></div>
-        <div class="brand-logo"><img src="image/logo_brand/niko.png" alt="Niko"></div>
-        <div class="brand-logo"><img src="image/logo_brand/philips.png" alt="Philips"></div>
-        <div class="brand-logo"><img src="image/logo_brand/polytron.png" alt="Polytron"></div>
-        <div class="brand-logo"><img src="image/logo_brand/rinnai.png" alt="Rinnai"></div>
-        <div class="brand-logo"><img src="image/logo_brand/rsa.png" alt="RSA"></div>
-        <div class="brand-logo"><img src="image/logo_brand/samono.png" alt="Samono"></div>
-        <div class="brand-logo"><img src="image/logo_brand/sharp.png" alt="Sharp"></div>
-        <div class="brand-logo"><img src="image/logo_brand/tcl.png" alt="TCL"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Shopping -->
-<section id="shopping" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem; background:var(--bg-secondary)">
-    <h2 class="section-title" data-i18n="shoppingTitle">Shopping</h2>
-    <div class="shopping-grid">
-      <div class="shopping-card">
-        <img src="image/Shopping.png" alt="Shopee" style="height:220px">
-        <h3>Shopee</h3>
-        <p>Belanja mudah aman cepat</p>
-        <a href="https://shopee.co.id/harriselectronic" class="btn" target="_blank">Buka Shopee</a>
-      </div>
-      <div class="shopping-card">
-        <img src="image/shopee.png" alt="Tokopedia" style="height:220px">
-        <h3>Tokopedia</h3>
-        <p>Harga kompetitif ready stock</p>
-        <a href="https://www.tokopedia.com/harriselectronicc" class="btn" target="_blank">Buka Tokopedia</a>
-      </div>
-      <div class="shopping-card">
-        <img src="image/tiktok.png" alt="TikTok" style="height:220px">
-        <h3>TikTok Shop</h3>
-        <p>Live shopping seru diskon</p>
-        <a href="https://www.tiktok.com/@harriselectronic" class="btn" target="_blank">Buka TikTok</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Kontak -->
-<section id="kontak" class="fade-in">
-  <div style="max-width:1200px; margin:0 auto; padding:6rem 2rem">
-    <h2 class="section-title" data-i18n="contactTitle">Kontak Kami</h2>
-    <div class="contact-container">
-      <div class="contact-info">
-        <h3 data-i18n="jamOp"><i class="fas fa-clock" style="color:#00b894; margin-right:1rem"></i>Jam Operasional</h3>
-        <p data-i18n="jamDesc" style="font-size:1.3rem; margin-bottom:2rem"></p>
-        <div class="contact-item">
-          <i class="fas fa-map-marker-alt" style="color:#ff6b00"></i>
-          <span data-i18n="alamat"></span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-phone" style="color:#00b894"></i>
-          <span data-i18n="telepon"></span>
-        </div>
-        <div class="contact-item">
-          <i class="fab fa-whatsapp" style="color:#25D366"></i>
-          <span data-i18n="whatsapp"></span>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope" style="color:#ff8533"></i>
-          <span data-i18n="email"></span>
-        </div>
-      </div>
-      <div>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.5!2d106.701!3d-6.749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2zNsKwNDQnNTIuNSJTIDEwNsKwNDInMTMuNyJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="300" style="border:0; border-radius:20px; box-shadow:0 15px 40px rgba(0,0,0,0.2); margin-bottom:2rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <form id="contact-form">
-          <input type="text" data-i18n="formName" placeholder="Nama Lengkap" required>
-          <input type="email" data-i18n="formEmail" placeholder="Email" required>
-          <input type="text" data-i18n="formSubject" placeholder="Subjek" required>
-          <textarea data-i18n="formMessage" rows="4" placeholder="Pesan Anda" required></textarea>
-          <button type="submit" class="btn" data-i18n="formSubmit">Kirim Pesan</button>
-        </form>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:5rem">
-      <h3 style="font-size:2.2rem; color:#00b894; margin-bottom:2rem" data-i18n="testimoniTitle">Testimoni Pelanggan</h3>
-      <div class="testimoni-grid">
-        <div class="testimoni-card">
-          <div class="testimoni-stars">⭐⭐⭐⭐⭐</div>
-          <p>"Pelayanan sangat ramah, pengiriman cepat dan produk asli!"</p>
-          <strong>- Ahmad S., Sukabumi</strong>
-        </div>
-        <div class="testimoni-card">
-          <div class="testimoni-stars">⭐⭐⭐⭐⭐</div>
-          <p>"Harga terbaik, kualitas terjamin. Recommended!"</p>
-          <strong>- Lisa P.</strong>
-        </div>
-        <div class="testimoni-card">
-          <div class="testimoni-stars">⭐⭐⭐⭐⭐</div>
-          <p>"Distribusi lancar ke toko saya. Kerjasama jangka panjang."</p>
-          <strong>- Tokoh Mitra</strong>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="fade-in">
-  <div class="footer-grid">
-    <div>
-      <img src="image/logo_sosmed/logo haris full.png" alt="Logo" height="45">
-      <p>Sukabumi | Offline | Distribusi | Online Shopee/Tokopedia</p>
-    </div>
-    <div>
-      <h4 data-i18n="quicklinks">Quick Links</h4>
-      <a href="#tentang">Tentang Kami</a>
-      <a href="#layanan">Layanan</a>
-      <a href="#produk">Produk</a>
-      <a href="#kontak">Kontak</a>
-    </div>
-    <div>
-      <h4>Kontak</h4>
-      <p data-i18n="telepon"></p>
-      <p data-i18n="whatsapp"></p>
-      <p data-i18n="email"></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p data-i18n="copyright">© 2024 HARRIS ELEKTRONIK. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<script src="langs.js"></script>
-<script src="script.js"></script>
-
-<!-- WA Float -->
-<a href="https://wa.me/6281563166847?text=Halo Harris Elektronik, saya tertarik belanja" class="whatsapp-float" target="_blank">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Back to Top -->
-<button id="back-to-top">
-  <i class="fas fa-chevron-up"></i>
-</button>
-
+    // Button hover
+    const buttons = document.querySelectorAll('#tentang a');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = 'translateY(-4px) scale(1.05)';
+        btn.style.boxShadow = '0 15px 40px rgba(255,102,0,0.6)';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translateY(0) scale(1)';
+        btn.style.boxShadow = '0 8px 25px rgba(255,102,0,0.4)';
+      });
+    });
+  </script>
 </body>
 </html>
