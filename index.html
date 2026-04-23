@@ -3,188 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Harris Electronic</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <title>Harris Elektronik - Toko Elektronik Terpercaya</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="image/logo_sosmed/harris.png">
+  <meta name="description" content="Harris Elektronik - Distributor peralatan rumah tangga dan elektronik terlengkap. Kualitas terjamin, harga bersaing.">
 </head>
-<body style="background: black; color: white; margin: 0; font-family: 'Quicksand', sans-serif;">
-  <!-- Navbar Orange w/ Logo Left -->
-  <header style="position: fixed; top: 0; width: 100%; background: #FF6600; z-index: 1000; padding: 1rem 0; box-shadow: 0 4px 12px rgba(255,102,0,0.4);">
-    <nav style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; align-items: center; padding: 0 3rem;">
-      <!-- Logo Kiri Atas -->
-      <div style="display: flex; align-items: center; gap: 1rem; margin-left: -400px;">
-        <img src="image/logo_sosmed/logo haris full.png" alt="Harris Electronic Logo" style="height: 50px; width: auto;">
+<body>
+  <!-- Loading Screen -->
+  <div class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="image/logo_sosmed/logo haris full.png" alt="Harris Elektronik">
       </div>
-      <!-- Nav Buttons White Text -->
-      <ul style="display: flex; list-style: none; gap: 2rem; margin: 0; padding: 0;">
-        <li><a href="#home" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Home</a></li>
-        <li><a href="#tentang" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Tentang kami</a></li>
-        <li><a href="#visi" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Visi & Misi</a></li>
-        <li><a href="#layanan" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Layanan kami</a></li>
-        <li><a href="#produk" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Produk</a></li>
-        <li><a href="#shopping" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Shopping</a></li>
-        <li><a href="#kontak" style="color: white; text-decoration: none; font-weight: 500; font-size: 1.1rem; transition: color 0.3s, transform 0.3s;">Kontak</a></li>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#visi-misi">Visi & Misi</a></li>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#shopping">Shopping</a></li>
+        <li><a href="#review">Review</a></li>
+        <li><a href="#kontak">Kontak</a></li>
       </ul>
-      <!-- Mobile Hamburger (Temporary Hidden) -->
-      <div class="hamburger" style="display: none; flex-direction: column; gap: 4px; cursor: pointer;">
-        <span style="width: 25px; height: 3px; background: white;"></span>
-        <span style="width: 25px; height: 3px; background: white;"></span>
-        <span style="width: 25px; height: 3px; background: white;"></span>
-      </div>
-    </nav>
-  </header>
-
-<<<<<<< HEAD
-  <!-- Hero Section - Black BG, Center Content Matching image/home.png -->
-  <main style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 120px 2rem 4rem; background: linear-gradient(rgba(0,0,0,0.95), rgba(0,0,0,0.95)), url('image/toko.jpg') center/cover; background-size: cover;">
-    <section id="home" style="max-width: 900px;">
-      <!-- Title Besar Center -->
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.3rem;">
-        <img src="image/logo_sosmed/harris.png" alt="Harris" style="height: 170px; width: auto; filter: drop-shadow(0 6px 30px rgba(255,255,255,0.6));">
-        <h1 style="font-size: clamp(5rem, 11vw, 7rem); font-weight: 900; color: white; margin: 0; letter-spacing: -0.02em; text-shadow: 0 4px 25px rgba(255,255,255,0.5); white-space: nowrap;">Harris Electronic</h1>
-=======
-<!-- Loading Spinner -->
-<div class="loader">
-  <div class="spinner"></div>
-  <p>Loading Harris Elektronik...</p>
-</div>
-
-<!-- Navbar #ff6b00 solid -->
-<header>
-  <nav>
-    <div class="logo">
-      <img src="image/logo_sosmed/logo haris full.png" alt="HARRIS ELEKTRONIK">
-    </div>
-    <ul class="nav-links">
-      <li><a href="#home" data-i18n="home">Home</a></li>
-      <li><a href="#tentang" data-i18n="tentang">Tentang Kami</a></li>
-      <li><a href="#visi" data-i18n="visiMisi">Visi & Misi</a></li>
-      <li><a href="#layanan" data-i18n="layanan">Layanan</a></li>
-      <li><a href="#produk" data-i18n="produk">Produk</a></li>
-      <li><a href="#shopping" data-i18n="shopping">Shopping</a></li>
-      <li><a href="#kontak" data-i18n="kontak">Kontak</a></li>
-    </ul>
-    <div class="toggles">
-      <button class="lang-toggle" data-i18n="toggleLang">EN</button>
-      <button class="theme-toggle" data-i18n="toggleDark">Dark</button>
       <div class="hamburger">
-        <span></span><span></span><span></span>
->>>>>>> 0ba5c46 (3commit)
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-      
-      <!-- Slogan Below - Satu Baris -->
-      <p style="font-size: clamp(2rem, 100vw, 2rem); color: #DDDDDD; margin: 0 0 4rem 0; font-weight: 1000; white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Sahabat Elektronikmu yang Terpercaya</p>
-      
-      <!-- Social Logos Grid Below (tiktok, fb, ig, shopee, tokopedia) -->
-      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; max-width: 500px; margin: 0 auto;">
-        <a href="https://tiktok.com/@harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
-          <img src="image/logo_sosmed/tiktok.png" alt="TikTok" style="width: 40px; height: 40px;">
-        </a>
-        <a href="https://facebook.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
-          <img src="image/logo_sosmed/fb.png" alt="Facebook" style="width: 40px; height: 40px;">
-        </a>
-        <a href="https://instagram.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
-          <img src="image/logo_sosmed/ig.png" alt="Instagram" style="width: 40px; height: 40px;">
-        </a>
-        <a href="https://shopee.co.id/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
-          <img src="image/logo_sosmed/shopee.png" alt="Shopee" style="width: 40px; height: 40px;">
-        </a>
-        <a href="https://tokopedia.com/harriselektronik" target="_blank" style="display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; background: rgba(255,255,255,0.1); border-radius: 20px; transition: all 0.4s ease; backdrop-filter: blur(10px);">
-          <img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia" style="width: 40px; height: 40px;">
-        </a>
+    </div>
+  </nav>
+
+  <!-- Hero/Home -->
+  <section id="home" class="hero">
+    <div class="particles"></div>
+    <div class="hero-content animate-on-scroll">
+      <h1 data-speed="0.5" class="parallax">Harris Elektronik</h1>
+      <p>Toko Elektronik Terpercaya dengan Pilihan Lengkap & Harga Bersaing. Kualitas Terjamin, Layanan Prima.</p>
+      <a href="#produk" class="btn">Lihat Produk Kami</a>
+      <div class="hero-social">
+        <a href="https://www.instagram.com/harriselectronic.id/" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/ig.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/p/Harris-Electronic-Official-61559271062964/" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/fb.png" alt="Facebook"></a>
+        <a href="https://www.youtube.com/@HarrisElectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/yt.png" alt="YouTube"></a>
+        <a href="https://www.tiktok.com/@harriselectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/tiktok.png" alt="TikTok"></a>
+        <a href="https://x.com/HarrisElec89121" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/twitter.png" alt="Twitter"></a>
+        <a href="mailto:info@harriselektronik.com"><img src="image/logo_sosmed/email.png" alt="Email"></a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- Inline Script for Hover Animations -->
-  <script>
-    // Navbar hover
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        link.style.color = '#FFD700';
-        link.style.transform = 'translateY(-3px)';
-      });
-      link.addEventListener('mouseleave', () => {
-        link.style.color = 'white';
-        link.style.transform = 'translateY(0)';
-      });
-    });
-    
-    // Social hover
-    document.querySelectorAll('main a').forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        link.style.transform = 'scale(1.1) rotate(10deg)';
-        link.style.background = 'rgba(255,102,0,0.3)';
-      });
-      link.addEventListener('mouseleave', () => {
-        link.style.transform = 'scale(1)';
-        link.style.background = 'rgba(255,255,255,0.1)';
-      });
-    });
+  <!-- Profil Perusahaan -->
+  <section id="profil" class="animate-on-scroll">
+    <h2 class="section-title">Profil Perusahaan</h2>
+    <div class="profil-grid">
+      <div class="profil-image animate-left">
+        <img src="image/foto1.jpg" alt="Harris Elektronik Store">
+      </div>
+      <div class="profil-content animate-right">
+        <h3>Tentang Harris Elektronik</h3>
+        <p>Harris Elektronik adalah distributor terkemuka peralatan rumah tangga dan elektronik di Indonesia. Didirikan sejak 2005, kami telah melayani ribuan pelanggan dengan komitmen kualitas terbaik dan pelayanan prima.</p>
+        <p>Dengan pengalaman lebih dari 15 tahun, koleksi produk lengkap dari berbagai brand ternama, dan tim profesional, Harris Elektronik menjadi pilihan utama untuk kebutuhan elektronik Anda.</p>
+        <a href="#kontak" class="btn">Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^=\"#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
+  <!-- Visi & Misi -->
+  <section id="visi-misi" class="animate-on-scroll">
+    <h2 class="section-title">Visi & Misi</h2>
+    <div class="visi-misi-grid">
+      <div class="card animate-on-scroll">
+        <div class="card-icon">🎯</div>
+        <h3>Visi</h3>
+        <p>Menjadi distributor elektronik terbesar dan terpercaya di Indonesia dengan jangkauan nasional.</p>
+      </div>
+      <div class="card animate-on-scroll">
+        <div class="card-icon">🚀</div>
+        <h3>Misi</h3>
+        <p>1. Menyediakan produk berkualitas tinggi dari brand ternama.<br>
+           2. Memberikan pelayanan pelanggan yang ramah dan cepat.<br>
+           3. Menawarkan harga kompetitif dan promo menarik.<br>
+           4. Melakukan inovasi terus menerus dalam layanan.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Tentang Kami - Mirip image/Profil Perusahaan.png -->
-  <section id="tentang" style="padding: 8rem 3rem 6rem; background: white; color: black; scroll-margin-top: 120px;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="font-size: clamp(3rem, 5vw, 4rem); font-weight: 800; text-align: center; margin-bottom: 4rem; color: #007146; letter-spacing: -0.01em;">Profil Perusahaan</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center;">
-        <div style="order: 2;"></div>
-        <!-- Left: Image toko.jpg -->
-        <div style="position: relative; clip-path: polygon(0 0, 85% 0, 100% 100%, 0% 100%); height: 400px; border-radius: 24px 24px 0 24px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
-          <img src="image/toko.jpg" alt="Toko Harris Elektronik" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;">
+  <!-- Layanan Kami -->
+  <section id="layanan" class="animate-on-scroll">
+    <h2 class="section-title">Layanan Kami</h2>
+    <div class="layanan-grid">
+      <div class="card">
+        <div class="card-icon">🛒</div>
+        <h3>Penjualan</h3>
+        <p>Penjualan lengkap berbagai produk elektronik rumah tangga.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Service</h3>
+        <p>Layanan perbaikan dan maintenance produk elektronik.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚚</div>
+        <h3>Pengiriman</h3>
+        <p>Pengiriman cepat ke seluruh wilayah Indonesia.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💳</div>
+        <h3>Cicilan</h3>
+        <p>Fasilitas cicilan 0% dengan kartu kredit dan e-wallet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Produk -->
+  <section id="produk" class="animate-on-scroll">
+    <h2 class="section-title">Produk Unggulan</h2>
+    <div id="produk-slider">
+      <div class="slider-track">
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/ac.png" alt="AC">
+          <div class="product-info">
+            <h4>AC Gree 1 PK</h4>
+            <div class="product-price">Rp 3.500.000</div>
+          </div>
         </div>
-        <!-- Right: Text Content -->
-        <div style="order: 1;">
-          <p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 2rem; color: black; font-weight: 400;">
-            HARRIS ELEKTRONIK merupakan toko elektronik terpercaya di Sukabumi yang melayani <strong>penjualan langsung (offline)</strong>, <strong>distribusi ke toko-toko lain</strong>, dan <strong>penjualan online</strong> melalui marketplace terkemuka seperti Shopee dan Tokopedia.
-          </p>
-          <p style="font-size: 1.3rem; line-height: 1.8; color: #050505; font-weight: 400;">
-            Kami menyediakan berbagai produk elektronik berkualitas dari brand-brand terkenal dengan harga kompetitif dan pelayanan terbaik. Toko fisik kami siap melayani Anda secara langsung.
-          </p>
-          <div style="margin-top: 3rem;">
-            <a href="#layanan" style="display: inline-block; background: #FF6600; color: white; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem; transition: all 0.4s ease; box-shadow: 0 8px 25px rgba(255,102,0,0.4);">Lihat Layanan Kami</a>
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/kulkas.png" alt="Kulkas">
+          <div class="product-info">
+            <h4>Kulkas Sharp 2 Pintu</h4>
+            <div class="product-price">Rp 4.200.000</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/mesin_cuci.png" alt="Mesin Cuci">
+          <div class="product-info">
+            <h4>Mesin Cuci Polytron Top Load</h4>
+            <div class="product-price">Rp 2.800.000</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/tv.png" alt="TV">
+          <div class="product-info">
+            <h4>TV LED TCL 43 Inch</h4>
+            <div class="product-price">Rp 3.100.000</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/kipas_angin.png" alt="Kipas Angin">
+          <div class="product-info">
+            <h4>Kipas Angin Miyako</h4>
+            <div class="product-price">Rp 450.000</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <img class="product-image" src="image/barang_elektronik/blender.png" alt="Blender">
+          <div class="product-info">
+            <h4>Blender Philips</h4>
+            <div class="product-price">Rp 350.000</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Hover Effects for Tentang Section -->
-  <script>
-    // Image hover
-    const tokoImg = document.querySelector('#tentang img');
-    if (tokoImg) {
-      tokoImg.addEventListener('mouseenter', () => {
-        tokoImg.style.transform = 'scale(1.05)';
-      });
-      tokoImg.addEventListener('mouseleave', () => {
-        tokoImg.style.transform = 'scale(1)';
-      });
-    }
-    
-    // Button hover
-    const buttons = document.querySelectorAll('#tentang a');
-    buttons.forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        btn.style.transform = 'translateY(-4px) scale(1.05)';
-        btn.style.boxShadow = '0 15px 40px rgba(255,102,0,0.6)';
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translateY(0) scale(1)';
-        btn.style.boxShadow = '0 8px 25px rgba(255,102,0,0.4)';
-      });
-    });
-  </script>
+  <!-- Shopping -->
+  <section id="shopping" class="shopping animate-on-scroll">
+    <h2 class="section-title">Belanja Sekarang</h2>
+    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+      Nikmati kemudahan belanja online dengan pengiriman cepat dan garansi resmi.
+    </p>
+    <div class="shopping-buttons">
+      <a href="https://shopee.co.id/harriselectronic" class="platform-btn shopee-btn" target="_blank" rel="noopener noreferrer">
+        <img src="image/logo_sosmed/shopee.png" alt="Shopee" style="width: 30px;">
+        Beli di Shopee
+      </a>
+      <a href="https://www.tokopedia.com/harriselectronicc" class="platform-btn tokopedia-btn" target="_blank" rel="noopener noreferrer">
+        <img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia" style="width: 30px;">
+        Beli di Tokopedia
+      </a>
+    </div>
+  </section>
+
+  <!-- Review -->
+  <section id="review" class="reviews animate-on-scroll">
+    <h2 class="section-title" style="color: white;">Apa Kata Pelanggan</h2>
+    <div class="slider-container">
+      <div class="review-slide active">
+        <div class="review-text">"Pelayanan sangat ramah dan produk berkualitas. Pengiriman cepat!"</div>
+        <div class="reviewer">- Siti A.</div>
+      </div>
+      <div class="review-slide">
+        <div class="review-text">"Harga terjangkau dengan garansi resmi. Sangat recommended!"</div>
+        <div class="reviewer">- Budi S.</div>
+      </div>
+      <div class="review-slide">
+        <div class="review-text">"Tim service profesional. AC baru langsung dingin maksimal."</div>
+        <div class="reviewer">- Rina P.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontak -->
+  <section id="kontak" class="animate-on-scroll">
+    <h2 class="section-title">Hubungi Kami</h2>
+    <div class="contact-grid">
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="No. Telepon" required>
+        </div>
+        <div class="form-group">
+          <textarea rows="5" placeholder="Pesan Anda..." required></textarea>
+        </div>
+        <button type="submit" class="form-btn">Kirim Pesan</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Alamat</h4>
+            <p>Jl. Elektronik No.123, Jakarta Barat</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Telepon</h4>
+            <p>(021) 123-4567</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p>info@harriselektronik.com</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕒</div>
+          <div>
+            <h4>Jam Buka</h4>
+            <p>Senin - Sabtu: 08.00 - 20.00</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h4>Harris Elektronik</h4>
+        <p>Distributor terpercaya peralatan rumah tangga sejak 2005.</p>
+      </div>
+      <div>
+        <h4>Brand Kami</h4>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+          <img src="image/logo_brand/sharp.png" alt="Sharp" style="height: 30px;">
+          <img src="image/logo_brand/polytron.png" alt="Polytron" style="height: 30px;">
+          <img src="image/logo_brand/philips.png" alt="Philips" style="height: 30px;">
+          <img src="image/logo_brand/gree.png" alt="Gree" style="height: 30px;">
+        </div>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/harriselectronic.id/" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/ig.png" alt="Instagram"></a>
+      <a href="https://www.facebook.com/p/Harris-Electronic-Official-61559271062964/" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/fb.png" alt="Facebook"></a>
+      <a href="https://www.youtube.com/@HarrisElectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/yt.png" alt="YouTube"></a>
+      <a href="https://www.tiktok.com/@harriselectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/tiktok.png" alt="TikTok"></a>
+      <a href="https://x.com/HarrisElec89121" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/twitter.png" alt="Twitter"></a>
+    </div>
+    <p>&copy; 2024 Harris Elektronik. All rights reserved.</p>
+  </footer>
+
+  <script defer src="js/script.js"></script>
 </body>
 </html>

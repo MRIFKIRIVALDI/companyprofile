@@ -1,51 +1,16 @@
-<<<<<<< HEAD
-# HARRIS ELEKTRONIK - Tentang Kami Section (Next after Home ✅)
-## Current State: Home Perfect (responsive, navbar hamburger kanan, hero rapat centered)
+# Website Remake TODO - All Updates Complete
 
-### Next: Tentang Kami like image/Profil Perusahaan.png
-**Plan:**
-1. **Add #tentang section** below home (black bg style)
-2. **Layout**: Likely 2-column grid (left image `toko.jpg`, right text "Profil Perusahaan")
-3. **Style**: Orange accents, white text, responsive grid
-4. **Content**: Company desc (penjualan offline/online/distribusi Sukabumi)
+## Steps:
+- [x] 1. Create `css/styles.css` responsive + animations
+- [x] 2. Create `js/script.js` animations + sliders
+- [x] 3. Create `index.html` all 8 UI sections
+- [x] 4. Feedback: Blue → Orange #ff7300
+- [x] 5. Feedback: Hero toko.jpg 5% opacity + black bg
+- [x] 6. Feedback: Font Quicksand applied
+- [x] 7. Feedback: Hero social icons visible (white bg circle) + linked
+- [x] 8. Feedback: Navbar JS blue → orange fixed
+- [x] 9. Feedback: All social & shopping links updated with real URLs
 
-**Dependent**: index.html
+✅ No blue colors remain. Orange #ff7300 consistent. Social icons clearly visible.
 
-**Followup**: Test, then Visi Misi
-=======
-# HARRIS ELEKTRONIK Fix Complete ✅
-
-## Diagnosis Fixed
-- ✅ langs.js created (full bilingual translations)
-- ✅ README.md rewritten (clean docs + instructions)
-- ✅ TODO.md updated (progress tracking)
-
-## Current Status
-```
-Website fully functional:
-✓ Language toggle (ID/EN) working
-✓ Dark/Light theme
-✓ All animations/carousel
-✓ Mobile responsive
-✓ Contact form demo
-✓ No console errors
-```
-
-## Test Commands
-```
-1. VSCode: Right-click index.html → "Open with Live Server"
-2. Or: Double-click index.html (file:// works for static preview)
-3. Verify: F12 Console → No errors
-4. Test: Toggle lang/theme, scroll, mobile view
-```
-
-## Next Steps (Optional)
-- [ ] Deploy to Netlify/Vercel
-- [ ] Add Google Analytics
-- [ ] Custom domain
-
-**Project ready to run! 🎉**
-
->>>>>>> 0ba5c46 (3commit)
-
-Approve plan to implement Tentang Kami section?
+**View:** Open `index.html` in browser or run `npx live-server .`
