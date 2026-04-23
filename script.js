@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Enhanced Script - Advanced Animations, Parallax, Navbar Scroll, Particles Ready
 document.addEventListener('DOMContentLoaded', function() {
   // Loading animation enhanced
@@ -186,11 +187,129 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Update all translatable content
+=======
+// HARRIS ELEKTRONIK - Enhanced JS (Form, Parallax, Back-to-Top, Animations)
+document.addEventListener('DOMContentLoaded', function() {
+  // Loading screen
+  setTimeout(() => document.body.classList.remove('loading'), 1500);
+
+  // Lang/Theme persistence
+  let currentLang = localStorage.getItem('lang') || 'id';
+  let currentTheme = localStorage.getItem('theme') || 'light';
+  
+  document.documentElement.lang = currentLang;
+  if (currentTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  
+  updateContent(currentLang);
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 100);
+    
+    // Hero parallax
+    const hero = document.querySelector('#home');
+    if (hero) hero.style.backgroundPositionY = `${50 + window.scrollY * 0.3}px`;
+    
+    // Back to top
+    document.getElementById('back-to-top').classList.toggle('show', window.scrollY > 500);
+  });
+
+  // Theme toggle
+  document.querySelector('.theme-toggle').addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+  });
+
+  // Lang toggle
+  document.querySelector('.lang-toggle').addEventListener('click', () => {
+    currentLang = currentLang === 'id' ? 'en' : 'id';
+    updateContent(currentLang);
+    localStorage.setItem('lang', currentLang);
+    document.documentElement.lang = currentLang;
+  });
+
+  // Mobile hamburger menu
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+  });
+
+  // Smooth scroll + close mobile menu
+  document.querySelectorAll('a[href^=\"#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute('href'))?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+
+  // Staggered scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, idx) => {
+      if (entry.isIntersecting) 
+        setTimeout(() => entry.target.classList.add('visible'), idx * 100);
+    });
+  }, { threshold: 0.1, rootMargin: '-50px 0px -100px 0px' });
+
+  document.querySelectorAll('.fade-in, .service-card, .product-card, .shopping-card, .testimoni-card').forEach(el => observer.observe(el));
+
+  // Contact form
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=\"submit\"]');
+    const text = btn.textContent;
+    btn.textContent = 'Mengirim...';
+    btn.disabled = true;
+    
+    // Simulate send
+    setTimeout(() => {
+      btn.textContent = '✅ Terkirim!';
+      e.target.reset();
+      setTimeout(() => {
+        btn.textContent = text;
+        btn.disabled = false;
+      }, 2000);
+    }, 1500);
+  });
+
+  // Back to top
+  document.getElementById('back-to-top').addEventListener('click', () => 
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  );
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav') && navLinks.classList.contains('active')) {
+      navLinks.classList.remove('active');
+      hamburger.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+  });
+
+  // Preload critical images
+  ['image/toko.jpg', 'image/logo_sosmed/logo haris full.png'].forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+});
+
+// i18n update function
+>>>>>>> 0ba5c46 (3commit)
 function updateContent(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    el.textContent = languages[lang][key] || el.textContent;
+    const key = el.dataset.i18n;
+    el.textContent = languages[lang]?.[key] || el.textContent;
   });
+<<<<<<< HEAD
   
   // Update toggles
   const langToggle = document.querySelector('.lang-toggle');
@@ -199,6 +318,16 @@ function updateContent(lang) {
     langToggle.textContent = languages[lang].toggleLang || 'EN';
     const isDark = document.body.classList.contains('dark');
     themeToggle.textContent = isDark ? (languages[lang]?.toggleLight || 'Light Mode') : (languages[lang]?.toggleDark || 'Dark Mode');
+=======
+
+  // Update toggles
+  const langToggle = document.querySelector('.lang-toggle');
+  const themeToggle = document.querySelector('.theme-toggle');
+  if (langToggle) langToggle.textContent = languages[lang]?.toggleLang || (lang === 'id' ? 'EN' : 'ID');
+  if (themeToggle) {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    themeToggle.textContent = isDark ? languages[lang]?.toggleLight || 'Light' : languages[lang]?.toggleDark || 'Dark';
+>>>>>>> 0ba5c46 (3commit)
   }
 }
 
