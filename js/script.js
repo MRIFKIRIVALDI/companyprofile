@@ -1,14 +1,5 @@
 // Wait for DOM
 document.addEventListener('DOMContentLoaded', function() {
-  // Loading Screen
-  const loading = document.querySelector('.loading');
-  if (loading) {
-    setTimeout(() => {
-      loading.style.opacity = '0';
-      setTimeout(() => loading.remove(), 500);
-    }, 2000);
-  }
-
   // Navbar
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
@@ -116,20 +107,71 @@ document.addEventListener('DOMContentLoaded', function() {
   new Slider('#produk-slider .slider-track');
   new Slider('#reviews-slider .slider-track');
 
-  // Review Slider
-  let reviewCurrent = 0;
-  const reviews = document.querySelectorAll('.review-slide');
-  
-  function showReview(index) {
-    reviews.forEach((review, i) => {
-      review.classList.toggle('active', i === index);
+  // Review Section Animations
+  // Counter Animation for Stats
+  function animateReviewCounters() {
+    const counters = document.querySelectorAll('.stat-counter');
+    counters.forEach(counter => {
+      const target = parseFloat(counter.getAttribute('data-target'));
+      const isDecimal = target % 1 !== 0;
+      const duration = 2000;
+      const startTime = performance.now();
+      const startValue = 0;
+
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = startValue + (target - startValue) * easeProgress;
+        
+        if (isDecimal) {
+          counter.textContent = currentValue.toFixed(1);
+        } else {
+          counter.textContent = Math.floor(currentValue).toLocaleString('id-ID');
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          if (isDecimal) {
+            counter.textContent = target.toFixed(1);
+          } else {
+            counter.textContent = target.toLocaleString('id-ID');
+          }
+        }
+      }
+
+      requestAnimationFrame(updateCounter);
     });
   }
 
-  setInterval(() => {
-    reviewCurrent = (reviewCurrent + 1) % reviews.length;
-    showReview(reviewCurrent);
-  }, 5000);
+  // Stagger animation for review cards
+  function animateReviewCards(container) {
+    const cards = container.querySelectorAll('.review-card');
+    cards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.1}s`;
+      card.classList.add('animated');
+    });
+  }
+
+  // Review section observer for counters and cards
+  const reviewSection = document.querySelector('#review');
+  if (reviewSection) {
+    const reviewObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Trigger counter animation
+          animateReviewCounters();
+          // Trigger card stagger animation
+          animateReviewCards(reviewSection);
+          reviewObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    reviewObserver.observe(reviewSection);
+  }
 
   // Form Submission
   const contactForm = document.querySelector('.contact-form');
