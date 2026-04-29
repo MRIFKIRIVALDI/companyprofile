@@ -132,7 +132,7 @@ ul {
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 0.7rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -222,10 +222,22 @@ ul {
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 6vw, 5rem);
-  margin-bottom: 0rem;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  margin: 0.5rem 0 1rem 0;
   white-space: nowrap;
-  animation: slideInLeft 1s ease-out 0.5s both;
+  animation: slideInLeft 1s ease-out 0.6s both;
+  margin: 5px 0;
+
+}
+
+.welcome-subtitle {
+  font-size: clamp(2rem, 7vw, 4rem);
+  margin: 0.3rem 0 0rem 0;
+  opacity: 0.95;
+  animation: slideInRight 1s ease-out 0.4s both;
+  font-weight: 500;
+  margin: 2px 0;
+
 }
 
 .hero p {
@@ -234,7 +246,9 @@ ul {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  animation: slideInRight 1s ease-out 0.7s both;
+  animation: slideInRight 1s ease-out 0.8s both;
+  margin: 5px 0;
+
 }
 
 .btn {
@@ -242,7 +256,7 @@ ul {
   padding: 1rem 2.5rem;
   background: #ff7300;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 50px;
   transition: all 0.3s ease;
   animation: bounce 2s infinite;
@@ -368,8 +382,8 @@ section {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   color: #666;
-  display: flex;
-  flex-wrap: wrap;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* Visi Misi */
@@ -1312,6 +1326,53 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Profil Read More and Welcome Styles */
+.welcome-text {
+  display: inline;
+}
+
+.summary-profil {
+  display: block;
+}
+
+.full-profil {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.profil-content.active .summary-profil {
+  display: none;
+}
+
+.profil-content.active .full-profil {
+  display: block;
+}
+
+.read-more-btn {
+  background: #ff7300;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(255, 115, 0, 0.3);
+}
+
+.read-more-btn:hover {
+  background: #e66b00;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 115, 0, 0.4);
+}
+
 /* Responsive Kontak */
 @media (max-width: 768px) {
   .kontak-container {
@@ -1331,3 +1392,4 @@ footer {
     padding: 1.5rem;
   }
 }
+
