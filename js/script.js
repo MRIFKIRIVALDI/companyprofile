@@ -1,180 +1,295 @@
 // Wait for DOM
 document.addEventListener('DOMContentLoaded', function() {
-  // Navbar
-  const hamburger = document.querySelector('.hamburger');
-  const navMenu = document.querySelector('.nav-menu');
+  
+  // ==================== GOOGLE SHEETS BANNER ====================
+  // Link CSV dari Sheet: File → Share → Publish to web → CSV
+  const SHEETS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxFTxGE9lCdi1zqAmOyP-zCKf-1WYhe7Bbq4XFyQtf2VLXtDLR_OysJrJuh6WOznIn5nMa9mGTD3Xw/pub?output=csv';
+  
+  // CORS proxy alternatif
+  const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+  
+  async function fetchGoogleSheetsData() {
+    try {
+      console.log('=== MENGAMBIL DATA DARI GOOGLE SHEETS ===');
+      
+      // Coba langsung dulu
+      let response;
+      try {
+        response = await fetch(SHEETS_CSV_URL);
+        if (response.ok) {
+          console.log('Berhasil ambil data langsung!');
+          return await response.text();
+        }
+      } catch (e) {
+        console.log('Gagal langsung, coba pake proxy...');
+      }
+      
+      // Coba pake proxy
+      const proxyUrl = CORS_PROXY + encodeURIComponent(SHEETS_CSV_URL);
+      response = await fetch(proxyUrl);
+      const text = await response.text();
+      console.log('Data dari proxy:', text.substring(0, 200));
+      return text;
+      
+    } catch (error) {
+      console.error('Error ambil data:', error);
+      return null;
+    }
+  }
+  
+  function parseBannerCSV(csvText) {
+    if (!csvText) return [];
+    
+    const lines = csvText.trim().split(/\r?\n/);
+    console.log('Total baris:', lines.length);
+    
+    const banners = [];
+    
+    // Skip header (baris 1), mulai dari baris 2
+    // Kolom "hasil" adalah kolom ke-3 (index 2)
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      
+      // Split pake koma
+      const cols = line.split(',');
+      
+      // Ambil kolom ke-3 (hasil) - index 2
+      if (cols.length >= 3) {
+        let imgUrl = cols[2].trim();
+        // Hapus tanda kutip
+        imgUrl = imgUrl.replace(/^"|"$/g, '');
+        
+        if (imgUrl && imgUrl.startsWith('http')) {
+          banners.push(imgUrl);
+          console.log('Banner ' + banners.length + ':', imgUrl);
+        }
+      }
+    }
+    
+    return banners;
+  }
+  
+async function loadBannersFromSheet() {
+    const bannerSlides = document.querySelector('.banner-slides');
+    if (!bannerSlides) return;
+    
+    console.log('=== MULAI AMBILE BANNER DARI SHEET ===');
+    
+    try {
+      const csvData = await fetchGoogleSheetsData();
+      const banners = parseBannerCSV(csvData);
+      
+      if (banners.length > 0) {
+        // Simpan default slides dulu sebelum clear
+        const hasDefaultSlides = bannerSlides.children.length > 0;
+        
+        // Hapus slide lama
+        bannerSlides.innerHTML = '';
+        
+// Buat slide baru dari Google Sheets - masing-masing di slide terpisah
+        banners.forEach(function(url, index) {
+          const slide = document.createElement('div');
+          slide.className = 'banner-slide';
+          
+          // Cek apakah URL adalah video (mp4, webm, atau embed youtube)
+          const isVideo = url.match(/\.(mp4|webm|ogg)$/i) || url.includes('youtube.com') || url.includes('youtu.be');
+          
+          if (isVideo) {
+            // Cek jika YouTube
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+              // Untuk YouTube, gunakan iframe
+              const iframe = document.createElement('iframe');
+              iframe.src = url.replace('watch?v=', 'embed/').replace('youtu.be/', 'embed/');
+              iframe.style.cssText = 'width:100%;max-width:800px;height:450px;border:none;border-radius:12px;';
+              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+              iframe.allowFullscreen = true;
+              slide.appendChild(iframe);
+            } else {
+              // Untuk video file langsung
+              const video = document.createElement('video');
+              video.src = url;
+              video.controls = true;
+              video.style.cssText = 'width:100%;max-width:800px;height:auto;border-radius:12px;';
+              slide.appendChild(video);
+            }
+          } else {
+            // Untuk gambar
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'Banner ' + (index + 1);
+            // Biarkan gambar dengan ukuran aslinya (aspect ratio asli)
+            img.style.cssText = 'max-width:100%;width:auto;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,0.15);';
+            
+            img.onerror = function() {
+              console.log('Gagal load gambar dari sheet, tetap tampilkan default');
+            };
+            
+            slide.appendChild(img);
+          }
+          
+          bannerSlides.appendChild(slide);
+        });
+        
+        // Update dots
+        const dotsContainer = document.querySelector('.banner-dots');
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          banners.forEach(function(_, i) {
+            const dot = document.createElement('button');
+            dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('data-index', i);
+            dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+            dotsContainer.appendChild(dot);
+          });
+        }
+        
+        console.log('=== BERHASIL AMBIL DARI SHEET: ' + banners.length + ' BANNER ===');
+      } else {
+        console.log('Tidak ada banner dari Sheet, pakai default (sudah ada di HTML)');
+      }
+    } catch (e) {
+      console.log('Gagal ambil dari Sheet, pakai default banner yang sudah ada di HTML');
+      // Jangan lakukan apa-apa - biarkan default slides tetap di HTML
+    }
+  }
+  
+  // ==================== BANNER CAROUSEL ====================
+  let bannerCarouselInterval = null;
+  
+  function initBannerCarousel() {
+    const bannerSlides = document.querySelector('.banner-slides');
+    const bannerDots = document.querySelector('.banner-dots');
+    const prevBtn = document.querySelector('.banner-prev');
+    const nextBtn = document.querySelector('.banner-next');
+    
+    if (!bannerSlides || !bannerDots) return;
+    
+    const slides = bannerSlides.querySelectorAll('.banner-slide');
+    if (slides.length === 0) return;
+    
+    console.log('=== INIT CAROUSEL DENGAN ' + slides.length + ' SLIDE ===');
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    
+    function updateCarousel() {
+      bannerSlides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+      document.querySelectorAll('.banner-dot').forEach(function(dot, i) {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+    
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+      updateCarousel();
+    });
+    
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      currentSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+      updateCarousel();
+    });
+    
+    document.querySelectorAll('.banner-dot').forEach(function(dot, i) {
+      dot.addEventListener('click', function() {
+        currentSlide = i;
+        updateCarousel();
+      });
+    });
+    
+    bannerCarouselInterval = setInterval(function() {
+      currentSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+      updateCarousel();
+    }, 5000);
+  }
+  
+  // Init Sistem Banner
+  async function initBannerSystem() {
+    await loadBannersFromSheet();
+    setTimeout(initBannerCarousel, 1000);
+  }
+  
+  initBannerSystem();
+  
+  // ==================== NAVBAR ====================
+  var hamburger = document.querySelector('.hamburger');
+  var navMenu = document.querySelector('.nav-menu');
 
   if (hamburger && navMenu) {
-    hamburger.addEventListener('click', () => {
+    hamburger.addEventListener('click', function() {
       navMenu.classList.toggle('active');
       hamburger.classList.toggle('active');
     });
 
-    // Close menu on link click
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
+    document.querySelectorAll('.nav-menu a').forEach(function(link) {
+      link.addEventListener('click', function() {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
       });
     });
   }
 
-  // Smooth Scroll
-  document.querySelectorAll('a[href^=\"#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  // ==================== SMOOTH SCROLL ====================
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      var target = document.querySelector(this.getAttribute('href'));
       if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });
 
-  // Navbar Background on Scroll - Orange fixed
-  window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-      navbar.style.background = 'rgba(238, 107, 0, 0.98)';
-    } else {
-      navbar.style.background = 'rgba(238, 107, 0, 0.95)';
+  // ==================== NAVBAR BACKGROUND ====================
+  window.addEventListener('scroll', function() {
+    var navbar = document.querySelector('.navbar');
+    if (navbar) {
+      navbar.style.background = window.scrollY > 100 ? 'rgba(238, 107, 0, 0.98)' : 'rgba(238, 107, 0, 0.95)';
     }
   });
 
-  // Scroll Animations with Intersection Observer
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+  // ==================== SCROLL ANIMATIONS ====================
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('animated');
-        
-        // Stagger animation for grids
-        const children = entry.target.querySelectorAll('.card, .product-card, .contact-item');
-        children.forEach((child, index) => {
-          child.style.animationDelay = `${index * 0.1}s`;
-        });
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.animate-on-scroll, .card, .product-card, section').forEach(el => {
+  document.querySelectorAll('.animate-on-scroll, section').forEach(function(el) {
     observer.observe(el);
   });
 
-  // Product Slider
-  class Slider {
-    constructor(container, slideClass = '.product-card', dots = true) {
-      this.container = document.querySelector(container);
-      this.slides = this.container ? this.container.querySelectorAll(slideClass) : [];
-      this.current = 0;
-      this.slideWidth = this.slides[0] ? this.slides[0].offsetWidth + 20 : 300;
-      this.init();
-    }
+  // ==================== REVIEW COUNTERS ====================
+  function animateCounters() {
+    document.querySelectorAll('.stat-counter').forEach(function(counter) {
+      var target = parseFloat(counter.getAttribute('data-target'));
+      var isDecimal = target % 1 !== 0;
+      var duration = 2000;
+      var start = performance.now();
 
-    init() {
-      if (!this.slides.length) return;
-      
-      this.container.style.width = `${this.slideWidth * 3}px`;
-      this.updateSlider();
-      
-      // Auto slide
-      setInterval(() => this.next(), 4000);
-    }
-
-    updateSlider() {
-      if (!this.container) return;
-      this.container.style.transform = `translateX(-${this.current * this.slideWidth}px)`;
-    }
-
-    next() {
-      this.current = (this.current + 1) % this.slides.length;
-      this.updateSlider();
-    }
-
-    prev() {
-      this.current = this.current === 0 ? this.slides.length - 1 : this.current - 1;
-      this.updateSlider();
-    }
-  }
-
-  // Init sliders
-  new Slider('#produk-slider .slider-track');
-  new Slider('#reviews-slider .slider-track');
-
-  // Review Section Animations
-  // Counter Animation for Stats
-  function animateReviewCounters() {
-    const counters = document.querySelectorAll('.stat-counter');
-    counters.forEach(counter => {
-      const target = parseFloat(counter.getAttribute('data-target'));
-      const isDecimal = target % 1 !== 0;
-      const duration = 2000;
-      const startTime = performance.now();
-      const startValue = 0;
-
-      function updateCounter(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease out cubic
-        const easeProgress = 1 - Math.pow(1 - progress, 3);
-        const currentValue = startValue + (target - startValue) * easeProgress;
-        
-        if (isDecimal) {
-          counter.textContent = currentValue.toFixed(1);
-        } else {
-          counter.textContent = Math.floor(currentValue).toLocaleString('id-ID');
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          if (isDecimal) {
-            counter.textContent = target.toFixed(1);
-          } else {
-            counter.textContent = target.toLocaleString('id-ID');
-          }
-        }
+      function update(now) {
+        var p = Math.min((now - start) / duration, 1);
+        var val = target * (1 - Math.pow(1 - p, 3));
+        counter.textContent = isDecimal ? val.toFixed(1) : Math.floor(val).toLocaleString('id-ID');
+        if (p < 1) requestAnimationFrame(update);
       }
-
-      requestAnimationFrame(updateCounter);
+      requestAnimationFrame(update);
     });
   }
 
-  // Stagger animation for review cards
-  function animateReviewCards(container) {
-    const cards = container.querySelectorAll('.review-card');
-    cards.forEach((card, index) => {
-      card.style.animationDelay = `${index * 0.1}s`;
-      card.classList.add('animated');
-    });
-  }
-
-  // Review section observer for counters and cards
-  const reviewSection = document.querySelector('#review');
+  var reviewSection = document.querySelector('#review');
   if (reviewSection) {
-    const reviewObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Trigger counter animation
-          animateReviewCounters();
-          // Trigger card stagger animation
-          animateReviewCards(reviewSection);
-          reviewObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-
-    reviewObserver.observe(reviewSection);
+    new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+      }
+    }, { threshold: 0.05 }).observe(reviewSection);
   }
 
-  // Form Submission
-  const contactForm = document.querySelector('.contact-form');
+  // ==================== FORM SUBMISSION ====================
+  var contactForm = document.querySelector('.contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -183,18 +298,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Parallax Effect
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelectorAll('.parallax');
-    parallax.forEach(el => {
-      const speed = el.getAttribute('data-speed') || 0.5;
-      el.style.transform = `translateY(${scrolled * speed}px)`;
+  // ==================== PARALLAX ====================
+  window.addEventListener('scroll', function() {
+    var scrolled = window.pageYOffset;
+    document.querySelectorAll('.parallax').forEach(function(el) {
+      var speed = el.getAttribute('data-speed') || 0.5;
+      el.style.transform = 'translateY(' + (scrolled * speed) + 'px)';
     });
   });
 
-  // Hover Animations
-  document.querySelectorAll('.product-card, .card, .btn').forEach(el => {
+  // ==================== HOVER EFFECTS ====================
+  document.querySelectorAll('.product-card, .card, .btn').forEach(function(el) {
     el.addEventListener('mouseenter', function() {
       this.style.transform = 'translateY(-10px) scale(1.02)';
     });
@@ -203,100 +317,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Counter Animation (for stats if added)
-  function animateCounters() {
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-target'));
-      const count = +counter.textContent;
-      const increment = target / 200;
-      
-      if (count < target) {
-        counter.textContent = Math.ceil(count + increment);
-        setTimeout(() => animateCounters(), 10);
-      } else {
-        counter.textContent = target;
-      }
-    });
-  }
-
-  // Typing Effect for Hero
-  function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    function type() {
-      if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      }
-    }
-    type();
-  }
-
-  // Initialize typing if hero has it
-  const heroTitle = document.querySelector('.hero h1');
-  if (heroTitle) {
-    const originalText = heroTitle.textContent;
-    setTimeout(() => typeWriter(heroTitle, originalText), 500);
-  }
-
-  // Particles Background (Hero)
-  function createParticles() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-    
-    for (let i = 0; i < 50; i++) {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.top = Math.random() * 100 + '%';
-      particle.style.width = Math.random() * 4 + 2 + 'px';
-      particle.style.height = particle.style.width;
-      particle.style.animationDelay = Math.random() * 20 + 's';
-      particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+  // ==================== PARTICLES ====================
+  var hero = document.querySelector('.hero');
+  if (hero) {
+    for (var i = 0; i < 50; i++) {
+      var particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.cssText = 'position:absolute;width:' + (Math.random() * 4 + 2) + 'px;height:' + (Math.random() * 4 + 2) + 'px;background:rgba(255,255,255,0.5);border-radius:50%;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;animation:' + (Math.random() * 20 + 20) + 's linear infinite';
       hero.appendChild(particle);
     }
   }
-  createParticles();
 
-  // Scroll to Top Button - Orange
-  const scrollBtn = document.createElement('button');
+  // ==================== SCROLL TO TOP ====================
+  var scrollBtn = document.createElement('button');
   scrollBtn.innerHTML = '↑';
   scrollBtn.className = 'scroll-to-top';
-  scrollBtn.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    background: #ff7300;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(255, 115, 0, 0.4);
-  `;
+  scrollBtn.style.cssText = 'position:fixed;bottom:30px;right:30px;width:50px;height:50px;border:none;border-radius:50%;background:#ff7300;color:white;font-size:1.5rem;cursor:pointer;opacity:0;transform:scale(0);transition:all 0.3s ease;z-index:1000;';
   document.body.appendChild(scrollBtn);
 
-  scrollBtn.addEventListener('click', () => {
+  scrollBtn.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-      scrollBtn.style.opacity = '1';
-      scrollBtn.style.transform = 'scale(1)';
-    } else {
-      scrollBtn.style.opacity = '0';
-      scrollBtn.style.transform = 'scale(0)';
-    }
+  window.addEventListener('scroll', function() {
+    var shown = window.scrollY > 500;
+    scrollBtn.style.opacity = shown ? '1' : '0';
+    scrollBtn.style.transform = shown ? 'scale(1)' : 'scale(0)';
   });
 
-  console.log('Harris Elektronik Website loaded with animations!');
+  console.log('=== HARRIS ELEKTRONIK SIAP ===');
 });

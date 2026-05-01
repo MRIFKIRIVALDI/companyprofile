@@ -1,15 +1,23 @@
-# Website Update TODO
+# TODO - Banner Carousel Implementation
 
-## Steps to Complete:
+## Task: Add Banner Slider between Home and Profil sections
 
-- [x] 1. Add new CSS styles to css/styles.css for welcome-text, full-profil, read-more-btn
-- [x] 2. Edit index.html home section: Add 'Welcome to' before Harris Electronic in h1
-- [x] 3. Edit index.html profil section: Replace content with truncated text + read more button + hidden full content
-- [x] 4. Edit index.html visi-misi cards: Update Visi and Misi content
-- [x] 5. Test changes: Refresh page, check parallax, read more toggle, responsive display
+### Steps:
+1. [x] Analyze existing project structure
+2. [x] Add HTML banner section between hero and profil
+3. [x] Add CSS styles for carousel
+4. [x] Add JavaScript for Google Sheets fetching and carousel logic
+5. [x] Test and verify
 
-**Progress: 5/5 completed**
+### Implementation Details:
+- Source: Google Sheets API (opensheet.elk.sh)
+- Spreadsheet: 1aAkB3j__nvCIueiw179FqTnZElWh_J8_XJ3LJ5fb4dA
+- Fields: slide (grouping), hasil (image URL), judul (title - optional)
+- Features: Group by slide, carousel navigation, responsive
 
-**Status: All changes implemented successfully!**
-
-
+### Status: ✅ COMPLETE
+- Banner section added between #home and #profil
+- Added to navigation menu
+- CSS carousel styles added
+- JavaScript fetches from Google Sheets and uses field "hasil"
+- Fallback images from image/ui_banner/ included
