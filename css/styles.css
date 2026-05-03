@@ -1,4 +1,4 @@
-/* Google Fonts - Quicksand */
+ /* Google Fonts - Quicksand */
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 /* Reset and Base */
@@ -922,7 +922,7 @@ section {
 
 .contact-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
   background: white;
@@ -1397,17 +1397,18 @@ footer {
   padding: 0;
   max-width: 100%;
   margin: 0;
+  min-height: 100vh;
   background: #f5f5f5;
   position: relative;
   z-index: 1;
-  /* Tidak ada min-height - menyesuaikan konten */
   display: block;
+  overflow: hidden;
 }
 
 .banner-carousel {
   position: relative;
   width: 100%;
-  max-width: 1400px;
+  height: 100%;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -1415,27 +1416,23 @@ footer {
 .banner-slides {
   display: flex;
   transition: transform 0.6s ease-in-out;
-  /* Tidak menggunakan flex-wrap - agar setiap slide di halaman terpisah */
+  height: 100%;
+  width: 300%; /* 3 slides */
 }
 
 .banner-slide {
   min-width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   padding: 2rem;
-  flex-wrap: wrap;
-  /* Container menyesuaikan ukuran konten */
-  min-height: auto;
-  /* Setiap slide di halaman terpisah */
 }
 
 .banner-slide img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
@@ -1475,7 +1472,7 @@ footer {
 
 .banner-dots {
   position: absolute;
-  bottom: 15px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1544,14 +1541,21 @@ footer {
 
 /* Banner Responsive */
 @media (max-width: 768px) {
+  .banner-section {
+    min-height: 70vh;
+  }
+  
   .banner-slide {
-    flex-direction: column;
+    min-height: 70vh;
     padding: 1rem;
   }
   
-  .banner-slide img {
-    max-width: 90%;
-    max-height: 200px;
+  .banner-slide img,
+  .banner-slide iframe,
+  .banner-slide video {
+    width: 100%;
+    height: 70vh;
+    object-fit: cover;
   }
   
   .banner-arrow {
@@ -1572,7 +1576,103 @@ footer {
     width: 10px;
     height: 10px;
   }
+  
+  .banner-dots {
+    bottom: 15px;
+  }
 }
 
+/* Kirim Pilihan Buttons - UI Enhancement */
+.kirim-pilihan {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
+.kirim-pilihan p {
+  text-align: center;
+  font-weight: 600;
+  color: #555;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
 
+.kirim-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.kirim-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s;
+}
+
+.kirim-btn:hover::before {
+  left: 100%;
+}
+
+.wa-btn {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+}
+
+.wa-btn:hover {
+  background: linear-gradient(135deg, #20ba5f 0%, #0f9d7a 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+}
+
+.email-btn {
+  background: linear-gradient(135deg, #4285F4 0%, #1A73E8 100%);
+  color: white;
+}
+
+.email-btn:hover {
+  background: linear-gradient(135deg, #357ae8 0%, #1557b0 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(66, 133, 244, 0.4);
+}
+
+/* Responsive buttons */
+@media (min-width: 480px) {
+  .kirim-pilihan {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .kirim-pilihan p {
+    margin: 0 1rem 0 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .kirim-btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* END OF FILE */

@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -16,7 +16,7 @@
         <img src="image/logo_sosmed/logo haris full.png" alt="Harris Elektronik">
       </div>
       <ul class="nav-menu">
-<li><a href="#home">Home</a></li>
+        <li><a href="#home">Home</a></li>
         <li><a href="#banner">Banner</a></li>
         <li><a href="#profil">Profil</a></li>
         <li><a href="#visi-misi">Visi & Misi</a></li>
@@ -53,11 +53,10 @@
 </div>
   </section>
 
-<!-- Banner Slider (from Google Sheets) -->
+  <!-- Banner Slider (from Google Sheets) -->
   <section id="banner" class="banner-section">
     <div class="banner-carousel">
       <div class="banner-slides">
-<!-- Default fallback banners - visible if JS fails to load, each image is its own slide -->
         <div class="banner-slide">
           <img src="image/ui_banner/banner 1 dan 2.png" alt="Banner 1">
         </div>
@@ -581,22 +580,35 @@
       </div>
 
       <div class="kontak-form-wrapper">
-        <h3>Kirim Pesan</h3>
-        <form class="contact-form">
+        <h3>Kirim Pesan (Pilih WA atau Email)</h3>
+        <form class="contact-form" id="contactForm">
           <div class="form-group-new">
-            <input type="text" placeholder="Nama Lengkap" required>
+            <input type="text" id="nama" placeholder="Nama Lengkap" required>
           </div>
           <div class="form-group-new">
-            <input type="email" placeholder="Email" required>
+            <input type="email" id="email" placeholder="Email" required>
           </div>
           <div class="form-group-new">
-            <input type="tel" placeholder="No. Telepon" required>
+            <input type="tel" id="telpon" placeholder="No. Telepon / WA" required>
           </div>
           <div class="form-group-new">
-            <textarea rows="5" placeholder="Pesan Anda..." required></textarea>
+            <textarea id="pesan" rows="5" placeholder="Pesan Anda..." required></textarea>
           </div>
-          <button type="submit" class="form-btn-new">Kirim Pesan</button>
+          
+          <!-- Tombol Kirim ke WA atau Email -->
+          <div class="kirim-pilihan">
+            <p>Pilih cara kirim:</p>
+            <button type="button" class="kirim-btn wa-btn" onclick="kirimKeWA()">
+              📱 Kirim ke WhatsApp
+            </button>
+            <button type="button" class="kirim-btn email-btn" onclick="kirimKeEmail()">
+              ✉️ Kirim ke Email
+            </button>
+          </div>
+          
+          <button type="submit" class="form-btn-new" style="display:none;">Kirim Pesan</button>
         </form>
+        <small>Pesan akan terkirim otomatis ke WA resmi Harris Elektronik atau email kami.</small>
       </div>
     </div>
   </section>
@@ -612,3 +624,4 @@
   <script defer src="js/script.js"></script>
 </body>
 </html>
+
