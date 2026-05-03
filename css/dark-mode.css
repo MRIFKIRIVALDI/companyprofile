@@ -1,0 +1,137 @@
+/* Dark Mode Styles - Added Sep 2024 */
+body.dark-mode {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --card-bg: #1e1e1e;
+  --border: #333;
+  --accent: #ff9800;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark-mode * {
+  color: inherit;
+}
+
+body.dark-mode .navbar {
+  background: rgba(28, 28, 28, 0.98) !important;
+}
+
+body.dark-mode .nav-menu a {
+  color: var(--text-primary);
+}
+
+body.dark-mode .nav-menu a:hover {
+  color: var(--accent);
+}
+
+body.dark-mode .card, 
+body.dark-mode .profil-content,
+body.dark-mode .shopee-card,
+body.dark-mode .kontak-form-wrapper,
+body.dark-mode .review-card {
+  background: var(--card-bg) !important;
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+body.dark-mode .section-title {
+  color: var(--accent);
+}
+
+body.dark-mode .hero {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+}
+
+body.dark-mode .shopping {
+  background: #181818;
+}
+
+body.dark-mode .reviews {
+  background: linear-gradient(135deg, #0a0a0a 0%, #121212 50%, #1a1a1e 100%);
+}
+
+body.dark-mode .stat-item {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode .shopee-title,
+body.dark-mode .shopee-meta {
+  color: var(--text-primary);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 16px;
+}
+
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.2);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.theme-toggle.dark-mode .sun { 
+  opacity: 0.3; 
+  transform: translateY(2px) scale(0.8); 
+}
+.theme-toggle:not(.dark-mode) .moon { 
+  opacity: 0.3; 
+  transform: translateY(-2px) scale(0.8); 
+}
+
+.theme-toggle svg {
+  transition: all 0.3s ease;
+}
+
+/* Lang Toggle */
+.lang-toggle {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.lang-toggle:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+.lang-toggle .flag {
+  position: absolute;
+  font-size: 12px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lang-toggle.id .flag-id,
+.lang-toggle.en .flag-en,
+.lang-toggle.es .flag-es { opacity: 1; }
+
