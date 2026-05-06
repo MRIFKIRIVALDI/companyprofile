@@ -19,7 +19,6 @@
       </div>
       <ul class="nav-menu">
         <li><a href="#home" data-lang-key="nav.home">Home</a></li>
-        <li><a href="#banner" data-lang-key="nav.banner">Banner</a></li>
         <li><a href="#profil" data-lang-key="nav.profil">Profil</a></li>
         <li><a href="#visi-misi" data-lang-key="nav.visi-misi">Visi & Misi</a></li>
         <li><a href="#layanan" data-lang-key="nav.layanan">Layanan</a></li>
@@ -82,26 +81,16 @@
 
   <!-- Banner Slider (from Google Sheets) -->
   <section id="banner" class="banner-section">
-    <div class="banner-carousel">
-      <div class="banner-slides">
-        <div class="banner-slide">
-          <img src="image/ui_banner/banner 1 dan 2.png" alt="Banner 1">
-        </div>
-        <div class="banner-slide">
-          <img src="image/ui_banner/banner 3 dan 4 dan 5.png" alt="Banner 2">
-        </div>
-        <div class="banner-slide">
-          <img src="image/ui_banner/vidio dan banner 6.png" alt="Banner 3">
-        </div>
-      </div>
-      <button class="banner-arrow banner-prev" aria-label="Previous slide">&#10094;</button>
-      <button class="banner-arrow banner-next" aria-label="Next slide">&#10095;</button>
-      <div class="banner-dots">
-        <button class="banner-dot active" data-index="0" aria-label="Slide 1"></button>
-        <button class="banner-dot" data-index="1" aria-label="Slide 2"></button>
-      </div>
+    <div class="banner-carousel" id="bannerCarousel">
+      <div class="banner-slides" id="bannerSlides" aria-live="polite"></div>
+
+      <button class="banner-arrow banner-prev" aria-label="Previous slide" type="button">&#10094;</button>
+      <button class="banner-arrow banner-next" aria-label="Next slide" type="button">&#10095;</button>
+
+      <div class="banner-dots" id="bannerDots" aria-label="Banner pagination"></div>
     </div>
   </section>
+
 
   <!-- Profil Perusahaan -->
   <section id="profil" class="animate-on-scroll">
@@ -118,7 +107,8 @@
           <p>Perusahaan kami sudah berkecimpung didunia elektronik & parabola sejak 1992 yang dikenal dengan nama SONY ELECTRONIC, dengan seiringnya waktu terus berkembang pesatnya penjualan dan tatatertib usaha secara undang - undang negara, mengharuskan kami untuk membentuk badan usaha yang bernama PT. Mitra Electronic Perkasa pada tahun 2016 yang sampai saat ini masih beroperasi menjual produk - produk elektronik  secara distribusi maupun secara retail konsumen langsung.</p>
         </div>
         <button class="read-more-btn" onclick="this.closest('.profil-content').classList.toggle('active')" data-lang-key="read.more">Baca Selengkapnya</button>
-        <a href="#kontak" class="btn">Hubungi Kami</a>
+        <a href="#kontak" class="btn" data-lang-key="profil.link">Hubungi Kami</a>
+
       </div>
     </div>
   </section>
@@ -600,7 +590,7 @@
             <a href="https://www.tiktok.com/@harriselectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/tiktok.png" alt="TikTok"></a>
             <a href="https://x.com/HarrisElec89121" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/twitter.png" alt="Twitter"></a>
             <a href="https://shopee.co.id/harriselectronic" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/shopee.png" alt="Shopee"></a>
-            <a href="#" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia"></a>
+            <a href="https://www.tokopedia.com/harriselectronicc" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/tokopedia.png" alt="Tokopedia"></a>
             <a href="https://www.google.com/maps/place/HARRIS+ELECTRONIC/@-6.9212343,106.8878042,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68370006c00809:0xcf77054d082c302b!8m2!3d-6.9212343!4d106.8903791!16s%2Fg%2F11ybvjbm0g?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer"><img src="image/logo_sosmed/maps.png" alt="Google Maps"></a>
           </div>
         </div>

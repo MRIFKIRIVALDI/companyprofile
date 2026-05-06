@@ -8,12 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // CORS proxy alternatif
   const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
   
+
   async function fetchGoogleSheetsData() {
     try {
       console.log('=== MENGAMBIL DATA DARI GOOGLE SHEETS ===');
-      
+
       // Coba langsung dulu
-      let response; 
+      let response;
       try {
         response = await fetch(SHEETS_CSV_URL);
         if (response.ok) {
@@ -23,19 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (e) {
         console.log('Gagal langsung, coba pake proxy...');
       }
-      
+
       // Coba pake proxy
       const proxyUrl = CORS_PROXY + encodeURIComponent(SHEETS_CSV_URL);
       response = await fetch(proxyUrl);
       const text = await response.text();
-      console.log('Data dari proxy:', text.substring(0, 200));
       return text;
-      
+
     } catch (error) {
       console.error('Error ambil data:', error);
       return null;
     }
   }
+
   
   function parseBannerCSV(csvText) {
     if (!csvText) return [];
@@ -46,29 +47,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const banners = [];
     
     // Skip header (baris 1), mulai dari baris 2
-    // Kolom "hasil" adalah kolom ke-3 (index 2)
+    // Sesuai ketentuan: pakai kolom 2 untuk image (index 2) dan kolom 3 untuk link (index 3)
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
-      
-      // Split pake koma
+
       const cols = line.split(',');
-      
-      // Ambil kolom ke-3 (hasil) - index 2
-      if (cols.length >= 3) {
+
+      // image_url = kolom ke-3 (index 2)
+      // link = kolom ke-4 (index 3)
+      if (cols.length >= 4) {
         let imgUrl = cols[2].trim();
+        let link = cols[3].trim();
+
         // Hapus tanda kutip
         imgUrl = imgUrl.replace(/^"|"$/g, '');
-        
+        link = link.replace(/^"|"$/g, '');
+
         if (imgUrl && imgUrl.startsWith('http')) {
-          banners.push(imgUrl);
-          console.log('Banner ' + banners.length + ':', imgUrl);
+          banners.push({ image_url: imgUrl, link: link || imgUrl });
+          console.log('Banner ' + banners.length + ':', imgUrl, '->', link || imgUrl);
         }
       }
     }
-    
+
     return banners;
   }
+
   
 async function loadBannersFromSheet() {
     const bannerSlides = document.querySelector('.banner-slides');
@@ -97,44 +102,57 @@ async function loadBannersFromSheet() {
           const slide = document.createElement('div');
           slide.className = 'banner-slide';
           
-          // Cek apakah URL adalah video (mp4, webm, atau embed youtube)
-          const isVideo = url.match(/\.(mp4|webm|ogg)$/i) || url.includes('youtube.com') || url.includes('youtu.be');
-          
-          if (isVideo) {
-            // Cek jika YouTube
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-              // Untuk YouTube, gunakan iframe
-              const iframe = document.createElement('iframe');
-              iframe.src = url.replace('watch?v=', 'embed/').replace('youtu.be/', 'embed/');
-              iframe.style.cssText = 'width:100%;max-width:800px;height:450px;border:none;border-radius:12px;';
-              iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-              iframe.allowFullscreen = true;
-              slide.appendChild(iframe);
-            } else {
-              // Untuk video file langsung
-              const video = document.createElement('video');
-              video.src = url;
-              video.controls = true;
-              video.style.cssText = 'width:100%;max-width:800px;height:auto;border-radius:12px;';
-              slide.appendChild(video);
-            }
+          // item sekarang bentuknya: { image_url, link }
+          const item = url;
+
+          const mediaUrl = item.image_url;
+          const clickUrl = item.link || item.image_url;
+
+          const a = document.createElement('a');
+          a.href = clickUrl;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+
+          const isYoutube = /youtu\.be|youtube\.com/i.test(mediaUrl);
+          const isVideoFile = /\.(mp4|webm|ogg)(\?|#|$)/i.test(mediaUrl);
+
+          if (isYoutube) {
+            const iframe = document.createElement('iframe');
+            const embedSrc = mediaUrl
+              .replace('watch?v=', 'embed/')
+              .replace('youtu.be/', 'embed/');
+
+            iframe.src = embedSrc;
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;';
+            a.appendChild(iframe);
+          } else if (isVideoFile) {
+            const video = document.createElement('video');
+            video.src = mediaUrl;
+            video.controls = true;
+            video.playsInline = true;
+            video.muted = true; // agar aman di beberapa browser
+            video.preload = 'metadata';
+            video.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+            a.appendChild(video);
           } else {
-            // Untuk gambar - biarkan ukuran asli/aspect ratio asli
             const img = document.createElement('img');
-            img.src = url;
+            img.src = mediaUrl;
             img.alt = 'Banner ' + (index + 1);
-            // Ukuran diperkecil biar semua gambar keliatan lengkap
-            img.style.cssText = 'width:85%;max-width:700px;max-height:65vh;height:auto;object-fit:contain;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,0.15);display:block;margin:0 auto;';
-            
+
             img.onerror = function() {
-              console.log('Gagal load gambar dari sheet, tetap tampilkan default');
+              console.log('Gagal load media dari sheet:', mediaUrl);
             };
-            
-            slide.appendChild(img);
+
+            a.appendChild(img);
           }
-          
+
+          slide.appendChild(a);
           bannerSlides.appendChild(slide);
         });
+
+
         
         // Update dots
         const dotsContainer = document.querySelector('.banner-dots');
@@ -206,16 +224,29 @@ async function loadBannersFromSheet() {
       });
     });
     
-    // Auto-slide dihapus - manual only
+    // Autoplay dimatikan (manual swap via panah/dots/swipe).
+    function goNext(){
+      currentSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
+      updateCarousel();
+    }
+
+    function goPrev(){
+      currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+      updateCarousel();
+    }
+
+
     // Touch swipe support for mobile
     let startX = 0;
     let endX = 0;
-    
+
     bannerSlides.addEventListener('touchstart', function(e) {
+      stopAutoPlay();
       startX = e.touches[0].clientX;
     });
     
     bannerSlides.addEventListener('touchend', function(e) {
+
       endX = e.changedTouches[0].clientX;
       const diffX = startX - endX;
       const minSwipe = 50; // Minimum swipe distance
@@ -231,6 +262,7 @@ async function loadBannersFromSheet() {
         updateCarousel();
       }
     });
+
     
     console.log('Banner: Manual mode (no auto-slide, arrows/dots/swipe OK!)');
   }
@@ -245,11 +277,21 @@ async function loadBannersFromSheet() {
   
 // ==================== THEME & LANGUAGE TOGGLES ====================
   // Theme Toggle
-  // Fix duplicate themeToggle - only right side works
-  const themeToggle = document.querySelector('.nav-controls .theme-toggle');
+  // Toggle button ada di elemen #themeToggle (di nav-right-controls)
+  const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
-  
+
+  function syncThemeUI(isDark) {
+    if (!themeToggle) return;
+    if (isDark) body.classList.add('dark-mode');
+    else body.classList.remove('dark-mode');
+
+    // class ini dipakai di css/dark-mode.css untuk styling tombol
+    themeToggle.classList.toggle('dark-mode', isDark);
+  }
+
   function initTheme() {
+
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
       body.classList.add('dark-mode');
@@ -299,6 +341,8 @@ async function loadBannersFromSheet() {
       'profil.summary': 'Harris Electronic adalah sebuah retail perusahaan menjual produk - produk elektronik & rumah tangga yang menyediakan kebutuhan konsumen langsung di bawah naungan PT. Mitra Electronic Perkasa sebagai distributor resmi dari beberapa merek / brand elektronik di Indonesia yang mendistribusikan produk - produk elektronik besar maupun elektronik kecil kepada tangan ke-3 yang dimana biasa di sebut sebagai Sub-Dealer sudah bekerja sama sekitar 270 outlet di Jawa barat dan sekitarnya.',
       'read.more': 'Baca Selengkapnya',
       'profil.btn': 'Hubungi Kami',
+      'profil.link': 'Hubungi Kami',
+
       
       'section.visi-misi': 'Visi & Misi',
       'visi.title': 'Visi',
@@ -519,23 +563,56 @@ async function loadBannersFromSheet() {
   }
   
   function setLanguage(lang) {
+    const dict = translations[lang] || {};
+
+    // Replace BOTH text nodes and attributes for anything tagged with data-lang-key
     document.querySelectorAll('[data-lang-key]').forEach(el => {
       const key = el.getAttribute('data-lang-key');
-      if (translations[lang][key]) el.textContent = translations[lang][key];
+      const value = dict[key];
+      if (!value) return;
+
+      // If element is a form/input/button/link, update relevant property.
+      const tag = (el.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea') {
+        el.placeholder = value;
+        return;
+      }
+      if (tag === 'button') {
+        el.textContent = value;
+        return;
+      }
+      // Link text
+      if (el.hasAttribute('href') && tag === 'a') {
+        el.textContent = value;
+        return;
+      }
+      // Optional: if element holds translatable HTML (future-proof)
+      if (el.hasAttribute('data-lang-html')) {
+        el.innerHTML = value;
+        return;
+      }
+
+
+      // Default: text content
+      el.textContent = value;
     });
-    
+
+    // alt text (images)
     document.querySelectorAll('[data-lang-alt]').forEach(el => {
       const key = el.getAttribute('data-lang-alt');
-      if (translations[lang][key]) el.alt = translations[lang][key];
+      const value = dict[key];
+      if (!value) return;
+      el.alt = value;
     });
-    
+
     // Update lang toggle
-    langToggle.className = `lang-toggle ${lang}`;
+    if (langToggle) langToggle.className = `lang-toggle ${lang}`;
     localStorage.setItem('lang', lang);
-    
+
     // Update html lang
     document.documentElement.lang = lang;
   }
+
   
   // Lang Dropdown Toggle
   function toggleLangDropdown() {
