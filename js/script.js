@@ -766,7 +766,7 @@ async function loadBannersFromSheet() {
     console.log('Pesan dikirim ke WA:', waUrl);
   };
 
-  // Fungsi kirim ke Email
+  // Fungsi kirim ke Email (langsung buka Gmail)
   window.kirimKeEmail = function() {
     const nama = document.getElementById('nama').value.trim();
     const telpon = document.getElementById('telpon').value.trim();
@@ -779,16 +779,20 @@ async function loadBannersFromSheet() {
       return;
     }
 
-    // Format body email
+    // Subject & body tetap otomatis dari form
     const emailSubject = encodeURIComponent(`Pesan dari Website - ${nama}`);
-    const emailBody = encodeURIComponent(`Halo Harris Elektronik,%0D%0D%0ANama: ${nama}%0D%0ATelepon/WA: ${telpon}%0D%0AEmail: ${email}%0D%0A%0D%0APesan:%0D%0A${pesan}%0D%0A%0D%0ATerima kasih! 😊`);
+    const emailBody = encodeURIComponent(
+      `Halo Harris Elektronik,\n\nNama: ${nama}\nTelepon/WA: ${telpon}\nEmail: ${email}\n\nPesan:\n${pesan}\n\nTerima kasih! 😊`
+    );
 
-    const mailtoUrl = `mailto:${EMAIL_ADDRESS}?subject=${emailSubject}&body=${emailBody}`;
-    window.location.href = mailtoUrl;
-    
+    // Buka Gmail composer dalam tab baru
+    // Catatan: beberapa parameter Gmail memakai format "view=cm".
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL_ADDRESS)}&su=${emailSubject}&body=${emailBody}`;
+    window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
     // Reset form
     document.getElementById('contactForm').reset();
-    console.log('Email dibuka:', mailtoUrl);
+    console.log('Gmail dibuka:', gmailUrl);
   };
 
   // Form fallback (jika ada submit langsung)
