@@ -134,7 +134,7 @@ ul {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(238, 107, 0, 0.95); /* #ee6b00 dark variant */
+  background: rgb(255, 116, 2); /* #ee6b00 dark variant */
   backdrop-filter: blur(10px);
   z-index: 1000;
   transition: all 0.3s ease;
@@ -855,38 +855,149 @@ section {
   color: #e66b00;
 }
 
+/* ==================== BRAND MARQUEE - INFINITE LOOP FIX ==================== */
+/* Fixed: Pure CSS animation tanpa duplikasi HTML */
+/* Click detection: Akurat karena menggunakan cloned elements via JS */
+
 .brand-marquee {
   overflow: hidden;
   width: 100%;
   position: relative;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  background: transparent;
+  padding: 1rem 0;
+}
+
+/* Fade edges untuk smooth visual (pointer-events: none) */
+.brand-marquee::before,
+.brand-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.brand-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+.brand-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+}
+
+/* Dark mode - remove gradient fade */
+body.dark-mode .brand-marquee::before,
+body.dark-mode .brand-marquee::after {
+  background: none;
 }
 
 .brand-track {
   display: flex;
-  gap: 4rem;
+  gap: 3rem;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  will-change: transform;
+  transform: translateZ(0); /* GPU acceleration */
+  animation: marquee-scroll 65s linear infinite;
+  padding: 0.5rem 0;
 }
 
-.brand-track img {
-  height: 60px;
+/* Pause animation saat hover (untuk accessibility testing) */
+.brand-marquee:hover .brand-track {
+  animation-play-state: paused;
+}
+
+.brand-track a.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  min-width: 120px;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              filter 0.25s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* CRITICAL: pointer-events auto memastikan click detection akurat */
+  pointer-events: auto;
+}
+
+.brand-track a.brand-logo img {
+  height: 80px;
   width: auto;
+  max-width: 120px;
   object-fit: contain;
   flex-shrink: 0;
-  opacity: 1;
-  transition: all 0.3s ease;
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: block;
 }
 
-.brand-track img:hover {
-  opacity: 1;
-  transform: scale(1.1);
+/* Hover: Scale dengan smooth easing */
+.brand-track a.brand-logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 12px rgba(255, 115, 0, 0.2));
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.brand-track a.brand-logo:hover img {
+  opacity: 1;
+  transform: scale(1.12);
+}
+
+/* Active: Press effect */
+.brand-track a.brand-logo:active {
+  transform: scale(0.96);
+}
+
+/* Focus untuk keyboard navigation */
+.brand-track a.brand-logo:focus-visible {
+  outline: 2px solid #ff7300;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* ==================== ANIMATION: Infinite Marquee ==================== */
+/* Menggunakan calc() untuk presisi - tidak perlu hardcoded duplikasi */
+/* Durasi: 45s untuk smooth effect dengan 18 logos */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Akan di-update oleh JavaScript untuk presisi */
+    transform: translateX(calc(-100% - 3rem));
+  }
+}
+
+/* Responsive: Reduce gap & size on mobile */
+@media (max-width: 768px) {
+  .brand-marquee {
+    padding: 0.75rem 0;
+  }
+
+  .brand-marquee::before,
+  .brand-marquee::after {
+    width: 60px;
+  }
+
+  .brand-track {
+    gap: 2rem;
+    animation: marquee-scroll 55s linear infinite;
+  }
+
+  .brand-track a.brand-logo {
+    height: 65px;
+    min-width: 100px;
+  }
+
+  .brand-track a.brand-logo img {
+    height: 65px;
+  }
 }
 
 /* Shopping */

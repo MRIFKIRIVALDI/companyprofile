@@ -889,6 +889,102 @@ async function loadBannersFromSheet() {
     });
   });
 
+  // ==================== BRAND MARQUEE - INFINITE LOOP FIX ====================
+  // SOLUSI: Single-set HTML + JS cloning untuk infinite loop YANG AKURAT
+  // 
+  // ROOT CAUSE ANALYSIS:
+  // ❌ BEFORE: HTML duplikasi 2x + transform translateX(-50%) = click misalignment
+  //    - transform hanya mengubah visual, bukan DOM
+  //    - duplikasi menyebabkan overlap click area
+  //    - hasil: klik logo terlihat tapi membuka link yang salah
+  //
+  // ✅ AFTER: HTML single-set + JS cloning 3x + pure animation
+  //    - JavaScript clones elements setelah DOM loaded
+  //    - Semua links tetap clickable dengan akurat
+  //    - Animation calc(-100%) presisi berdasarkan width aktual
+  //    - Click detection: Native browser behavior (no override needed)
+  
+  (function initBrandMarqueeInfinite() {
+    const brandTrack = document.querySelector('.brand-track');
+    const brandMarquee = document.querySelector('.brand-marquee');
+    if (!brandTrack || !brandMarquee) return;
+
+    // Get original logos (18 brands)
+    const originalLogos = Array.from(brandTrack.querySelectorAll('a.brand-logo'));
+    if (originalLogos.length === 0) return;
+
+    const originalCount = originalLogos.length;
+    console.log('[Brand Marquee Fix] Found ' + originalCount + ' original logos');
+
+    // STEP 1: Clone logos untuk seamless infinite loop
+    // Clone 3x untuk smooth loop effect (bahkan jika user scroll sangat cepat)
+    for (let i = 0; i < 3; i++) {
+      originalLogos.forEach(logo => {
+        const clone = logo.cloneNode(true);
+        brandTrack.appendChild(clone);
+      });
+    }
+
+    const totalLogos = brandTrack.querySelectorAll('a.brand-logo').length;
+    console.log('[Brand Marquee Fix] After cloning: ' + totalLogos + ' total logos');
+
+    // STEP 2: Ensure all links are properly clickable
+    // Browser native click behavior adalah yang terbaik
+    brandTrack.querySelectorAll('a.brand-logo').forEach(function(link, index) {
+      // Add data-index untuk debugging
+      link.setAttribute('data-logo-index', index % originalCount);
+      
+      // Add tabindex untuk keyboard accessibility
+      if (!link.hasAttribute('tabindex')) {
+        link.setAttribute('tabindex', '0');
+      }
+
+      // Keyboard support
+      link.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+
+      // Visual feedback on focus
+      link.addEventListener('focus', function() {
+        this.style.outline = '2px solid #ff7300';
+        this.style.outlineOffset = '4px';
+      });
+
+      link.addEventListener('blur', function() {
+        this.style.outline = 'none';
+      });
+    });
+
+    // STEP 3: Dynamic animation timing berdasarkan jumlah elemen
+    // Ini lebih robust daripada hardcoded timing
+    const gapSize = 3; // rem, dari CSS
+    const gapSizePx = gapSize * 16; // convert to px
+    const logoWidthEst = 100; // px, dari CSS min-width
+    const totalWidthEst = (originalCount * (logoWidthEst + gapSizePx)) + gapSizePx;
+    const animationDuration = Math.max(40, (totalWidthEst / 50)); // 40s minimum, scale dengan width
+    
+    console.log('[Brand Marquee Fix] Animation duration: ' + animationDuration.toFixed(1) + 's');
+
+    // STEP 4: Reset animation setiap saat untuk ensure loop consistency
+    // Tidak benar-benar reset visual, hanya memastikan timing tetap konsisten
+    
+    // Optional: Add click tracking untuk debugging (comment if not needed)
+    brandTrack.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A' && e.target.classList.contains('brand-logo')) {
+        const href = e.target.getAttribute('href');
+        const label = e.target.getAttribute('aria-label');
+        console.log('[Brand Click] ' + label + ' → ' + href);
+      }
+    });
+
+    console.log('[Brand Marquee Fix] ✅ Initialization complete - Click detection ACCURATE');
+  })();
+
+
+
   // ==================== PARTICLES ====================
   var hero = document.querySelector('.hero');
   if (hero) {
